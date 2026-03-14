@@ -771,40 +771,65 @@
 
   <!-- Output: Step 1 -->
   <div class="output-section" id="output1-section">
-    <div class="divider">Step 1 输出 · 战略大纲</div>
-    <div class="output-box" id="output1-box"></div>
+    <div class="divider">Step 1 输出 · 战略大纲 <span style="font-size:12px;font-weight:300;opacity:0.7">（可直接编辑修改）</span></div>
+    <textarea class="output-box" id="output1-box" style="width:100%;min-height:400px;font-family:'Noto Sans SC',sans-serif;font-size:13px;line-height:1.8;background:white;border:1px solid var(--border);border-radius:3px;padding:20px;resize:vertical;color:var(--ink);"></textarea>
     <div class="output-actions">
       <button class="btn btn-outline btn-sm" onclick="copyOutput('output1-box')">📋 复制大纲</button>
       <button class="btn btn-primary btn-sm" id="btn-step2" onclick="runStep2()">
         <span class="spinner" id="spinner2"></span>
-        <span id="btn2-text">继续 → 生成演讲内容（Step 2）</span>
+        <span id="btn2-text">继续 → 生成PPT内容（Step 2）</span>
       </button>
     </div>
   </div>
 
   <!-- Output: Step 2 -->
   <div class="output-section" id="output2-section">
-    <div class="divider">Step 2 输出 · Gamma Markdown</div>
-    <div class="output-box" id="output2-box"></div>
+    <div class="divider">Step 2 输出 · PPT内容 <span style="font-size:12px;font-weight:300;opacity:0.7">（可直接编辑修改）</span></div>
+    <textarea class="output-box" id="output2-box" style="width:100%;min-height:500px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.8;background:white;border:1px solid var(--border);border-radius:3px;padding:20px;resize:vertical;color:var(--ink);"></textarea>
     <div class="output-actions">
-      <button class="btn btn-accent" onclick="copyOutput('output2-box')">📋 复制 Markdown（去 Gamma 粘贴）</button>
+      <button class="btn btn-outline btn-sm" onclick="copyOutput('output2-box')">📋 复制内容</button>
       <button class="btn btn-outline btn-sm" onclick="downloadMarkdown()">⬇ 下载 .md 文件</button>
+      <button class="btn btn-primary btn-sm" id="btn-regen2" onclick="runStep2()">
+        <span class="spinner" id="spinner-regen2"></span>
+        <span>🔄 重新生成</span>
+      </button>
     </div>
 
-    <!-- Gamma CTA -->
-    <div class="gamma-cta" style="margin-top: 24px;">
-      <div class="gamma-cta-text">
-        <h3>最后一步：去 Gamma 生成视觉 PPT</h3>
-        <p>复制上方 Markdown，粘贴进 Gamma</p>
-        <div class="gamma-steps">
-          <div class="gamma-step"><span class="gamma-step-num">1</span>点击右侧按钮打开 Gamma</div>
-          <div class="gamma-step"><span class="gamma-step-num">2</span>选择「从文本创建」，粘贴 Markdown</div>
-          <div class="gamma-step"><span class="gamma-step-num">⚠</span>务必选择「<strong>保持此文本原样</strong>」</div>
+    <!-- 呈现工具选择 -->
+    <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+      <!-- Gamma CTA -->
+      <div class="gamma-cta" style="margin-top:0;">
+        <div class="gamma-cta-text">
+          <h3>方案一：Gamma（海外，视觉更丰富）</h3>
+          <p>复制上方内容，粘贴进 Gamma</p>
+          <div class="gamma-steps">
+            <div class="gamma-step"><span class="gamma-step-num">1</span>点击按钮打开 Gamma</div>
+            <div class="gamma-step"><span class="gamma-step-num">2</span>选择「从文本创建」，粘贴内容</div>
+            <div class="gamma-step"><span class="gamma-step-num">⚠</span>务必选择「<strong>保持此文本原样</strong>」</div>
+          </div>
         </div>
+        <a href="https://gamma.app/create" target="_blank" class="btn btn-outline" style="background:rgba(255,255,255,0.1);color:var(--paper);border-color:rgba(255,255,255,0.3);white-space:nowrap;margin-top:12px;">
+          打开 Gamma →
+        </a>
       </div>
-      <a href="https://gamma.app/create" target="_blank" class="btn btn-outline" style="background:rgba(255,255,255,0.1);color:var(--paper);border-color:rgba(255,255,255,0.3);white-space:nowrap;">
-        打开 Gamma →
-      </a>
+
+      <!-- Kimi CTA -->
+      <div class="gamma-cta" style="margin-top:0;background:linear-gradient(135deg,#1a2a4a,#2a3a6a);">
+        <div class="gamma-cta-text">
+          <h3>方案二：Kimi PPT（国内，无需科学上网）</h3>
+          <p>复制上方内容，粘贴进 Kimi PPT</p>
+          <div class="gamma-steps">
+            <div class="gamma-step"><span class="gamma-step-num">1</span>点击按钮打开 Kimi PPT</div>
+            <div class="gamma-step"><span class="gamma-step-num">2</span>选择「导入内容」，粘贴 Markdown</div>
+            <div class="gamma-step"><span class="gamma-step-num">⚠</span>选择「<strong>保持原有结构</strong>」</div>
+          </div>
+        </div>
+        <a href="https://kimi.moonshot.cn/kimiplus/conpg00t7lagbbkfnpg0" target="_blank" class="btn btn-outline" style="background:rgba(255,255,255,0.1);color:var(--paper);border-color:rgba(255,255,255,0.3);white-space:nowrap;margin-top:12px;">
+          打开 Kimi PPT →
+        </a>
+      </div>
+
     </div>
   </div>
 
@@ -1197,7 +1222,7 @@ ${material}
 
       // Show output
       const box = document.getElementById('output1-box');
-      box.textContent = step1Output;
+      box.value = step1Output;
       document.getElementById('output1-section').classList.add('visible');
 
       addLog(2, '大纲生成完成 ✓', 'success');
@@ -1216,7 +1241,8 @@ ${material}
   }
 
   async function runStep2() {
-    if (!step1Output) return showStatus('请先完成 Step 1');
+    if (!step1Output && !document.getElementById('output1-box').value) return showStatus('请先完成 Step 1');
+    step1Output = document.getElementById('output1-box').value || step1Output;
 
     const apiKey = document.getElementById('api-key').value.trim();
     const role = document.getElementById('role').value.trim() || '资深战略顾问';
@@ -1232,22 +1258,22 @@ ${material}
 
     addLog(3, '开始 Step 2：升级表达层…', 'working');
 
-# Role（角色）
+    const prompt = `# Role（角色）
 你是${role}，同时具备两种能力：麦肯锡顾问的结构思维 + TED演讲者的表达张力。
 你的任务是把关于「${topic}」的逻辑大纲，转化为"一眼看懂、有人味、能打动人"的PPT内容。
 
 # 黄金标准
 每一页做到：
-- 标题是金句（观点鲜明，让人想继续看）
-- 正文是故事（有场景、有冲突、有数据，但不超过3句话）
-- 要点是结论（每条bullet直接说结果，不铺垫）
+- 标题是金句（观点鲜明，结论先行，让人想继续看）
+- 正文是故事（有场景、有冲突、有数据，但不超过3句话，控制在60字以内）
+- 要点是结论（每条bullet直接说结果，不铺垫，不超过15字）
 
 # 每页执行三步
 1. **结论先行**：标题直接亮出这页最重要的判断，拒绝"现状分析""问题概述"这类无聊标题
-2. **接地气叙事**：用企业里真实会说的话写核心洞察，有具体场景，有数字，控制在2-3句话内
-3. **去AI味**：拒绝"赋能、协同、抓手、生态"，语言要像一个真实的人在说话
+2. **接地气叙事**：用企业里真实会说的话写核心洞察，有具体场景，有数字，像真实的人在说话
+3. **去AI味**：拒绝"赋能、协同、抓手、生态"，语言自信笃定
 
-# 严格按以下格式输出（为Gamma定制）
+# 严格按以下 Markdown 格式输出（兼容 Gamma 和 Kimi PPT）
 每一页用以下结构，页间用 --- 分隔：
 
 ---
@@ -1263,16 +1289,15 @@ ${material}
 
 ---
 
-以下是来自Step 1的战略大纲，请基于此进行扩写：
+以下是来自 Step 1 的战略大纲，请基于此进行扩写：
 
-${step1Output}
+${step1Output}`;
 
     try {
       step2Output = await callClaude(apiKey, prompt, 8000);
 
       const box = document.getElementById('output2-box');
-      // Render as readable markdown preview, but keep raw for copying
-      box.innerHTML = renderMarkdownPreview(step2Output);
+      box.value = step2Output;
       document.getElementById('output2-section').classList.add('visible');
 
       addLog(3, 'Gamma Markdown 生成完成 ✓', 'success');
@@ -1315,8 +1340,8 @@ ${step1Output}
   }
 
   function copyOutput(id) {
-    // Always copy the raw markdown, not the rendered HTML
-    const text = id === 'output2-box' ? step2Output : document.getElementById(id).textContent;
+    const el = document.getElementById(id);
+    const text = el.value !== undefined ? el.value : el.textContent;
     navigator.clipboard.writeText(text).then(() => {
       const toast = document.getElementById('copy-feedback');
       toast.classList.add('show');
@@ -1325,9 +1350,10 @@ ${step1Output}
   }
 
   function downloadMarkdown() {
-    if (!step2Output) return;
+    const content = document.getElementById('output2-box').value || step2Output;
+    if (!content) return;
     const topic = document.getElementById('topic').value.trim() || 'ppt-content';
-    const blob = new Blob([step2Output], { type: 'text/markdown;charset=utf-8' });
+    const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
