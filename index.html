@@ -33,7 +33,6 @@
     line-height: 1.7;
   }
 
-  /* Noise texture overlay */
   body::before {
     content: '';
     position: fixed;
@@ -51,7 +50,6 @@
     z-index: 1;
   }
 
-  /* Header */
   header {
     margin-bottom: 56px;
     border-bottom: 2px solid var(--ink);
@@ -91,7 +89,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* Step indicator */
   .step-flow {
     display: flex;
     align-items: center;
@@ -125,20 +122,11 @@
     opacity: 0.6;
   }
 
-  .step-item.active {
-    background: var(--ink);
-    color: var(--paper);
-  }
+  .step-item.active { background: var(--ink); color: var(--paper); }
   .step-item.active .step-num { opacity: 0.7; }
+  .step-item.done { color: var(--success); }
+  .step-item.done::after { content: ' ✓'; }
 
-  .step-item.done {
-    color: var(--success);
-  }
-  .step-item.done::after {
-    content: ' ✓';
-  }
-
-  /* Cards */
   .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -176,7 +164,89 @@
   .badge-claude { background: #e8f4f6; color: var(--step1); border: 1px solid var(--step1); }
   .badge-gamma { background: #f0ece4; color: var(--step3); border: 1px solid var(--step3); }
 
-  /* Form elements */
+  /* ── Mode Toggle ── */
+  .mode-toggle {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .mode-btn {
+    flex: 1;
+    padding: 11px 16px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    background: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-right: 1px solid var(--border);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .mode-btn:last-child { border-right: none; }
+
+  .mode-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  .mode-btn .mode-tag {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Redeem code section */
+  .redeem-section {
+    display: none;
+    animation: fadeInUp 0.3s ease;
+  }
+  .redeem-section.visible { display: block; }
+
+  .redeem-info {
+    background: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    border-radius: 3px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #1b5e20;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .redeem-remaining {
+    display: inline-block;
+    margin-left: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+  }
+
+  .redeem-error {
+    background: #fdecea;
+    border: 1px solid #ef9a9a;
+    border-radius: 3px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #c62828;
+    margin-top: 8px;
+    display: none;
+  }
+  .redeem-error.visible { display: block; }
+
   label {
     display: block;
     font-size: 12px;
@@ -201,9 +271,7 @@
     -webkit-appearance: none;
   }
 
-  input:focus, textarea:focus, select:focus {
-    border-color: var(--ink);
-  }
+  input:focus, textarea:focus, select:focus { border-color: var(--ink); }
 
   textarea {
     resize: vertical;
@@ -221,11 +289,7 @@
   .field-group { margin-bottom: 16px; }
   .field-group:last-child { margin-bottom: 0; }
 
-  .api-key-group {
-    display: flex;
-    gap: 8px;
-  }
-
+  .api-key-group { display: flex; gap: 8px; }
   .api-key-group input { flex: 1; }
 
   .api-hint {
@@ -237,13 +301,9 @@
     gap: 4px;
   }
 
-  .api-hint a {
-    color: var(--accent2);
-    text-decoration: none;
-  }
+  .api-hint a { color: var(--accent2); text-decoration: none; }
   .api-hint a:hover { text-decoration: underline; }
 
-  /* Buttons */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -260,47 +320,27 @@
     text-decoration: none;
   }
 
-  .btn-primary {
-    background: var(--ink);
-    color: var(--paper);
-  }
+  .btn-primary { background: var(--ink); color: var(--paper); }
   .btn-primary:hover:not(:disabled) {
     background: #2d2d4a;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(26,26,46,0.2);
   }
-  .btn-primary:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .btn-accent {
-    background: var(--accent);
-    color: white;
-  }
-  .btn-accent:hover {
-    background: #b04820;
-    transform: translateY(-1px);
-  }
+  .btn-accent { background: var(--accent); color: white; }
+  .btn-accent:hover { background: #b04820; transform: translateY(-1px); }
 
   .btn-outline {
     background: transparent;
     color: var(--ink);
     border: 1px solid var(--border);
   }
-  .btn-outline:hover {
-    border-color: var(--ink);
-    background: rgba(26,26,46,0.04);
-  }
+  .btn-outline:hover { border-color: var(--ink); background: rgba(26,26,46,0.04); }
 
-  .btn-sm {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-
+  .btn-sm { padding: 8px 16px; font-size: 12px; }
   .btn-full { width: 100%; justify-content: center; }
 
-  /* Loading state */
   .spinner {
     width: 16px;
     height: 16px;
@@ -311,19 +351,10 @@
     display: none;
   }
 
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Output area */
-  .output-section {
-    display: none;
-  }
-
-  .output-section.visible {
-    display: block;
-    animation: fadeInUp 0.4s ease;
-  }
+  .output-section { display: none; }
+  .output-section.visible { display: block; animation: fadeInUp 0.4s ease; }
 
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(16px); }
@@ -352,18 +383,10 @@
     color: var(--accent);
   }
 
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
+  @keyframes blink { 50% { opacity: 0; } }
 
-  .output-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
+  .output-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
 
-  /* Gamma CTA */
   .gamma-cta {
     background: linear-gradient(135deg, #1a1a2e 0%, #2a3a5c 100%);
     color: var(--paper);
@@ -383,26 +406,11 @@
     margin-bottom: 6px;
   }
 
-  .gamma-cta-text p {
-    font-size: 13px;
-    opacity: 0.7;
-    line-height: 1.5;
-  }
+  .gamma-cta-text p { font-size: 13px; opacity: 0.7; line-height: 1.5; }
 
-  .gamma-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: 8px;
-  }
+  .gamma-steps { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
 
-  .gamma-step {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 12px;
-    opacity: 0.8;
-  }
+  .gamma-step { display: flex; align-items: center; gap: 10px; font-size: 12px; opacity: 0.8; }
 
   .gamma-step-num {
     width: 20px;
@@ -417,7 +425,6 @@
     flex-shrink: 0;
   }
 
-  /* Progress log */
   .progress-log {
     margin-top: 16px;
     padding: 12px 16px;
@@ -431,18 +438,12 @@
 
   .progress-log.visible { display: block; }
 
-  .log-line {
-    display: flex;
-    gap: 10px;
-    padding: 2px 0;
-  }
-
+  .log-line { display: flex; gap: 10px; padding: 2px 0; }
   .log-time { opacity: 0.5; flex-shrink: 0; }
   .log-msg.success { color: var(--success); }
   .log-msg.working { color: var(--step1); }
   .log-msg.error { color: var(--accent); }
 
-  /* Status banner */
   .status-banner {
     padding: 12px 16px;
     border-radius: 3px;
@@ -456,7 +457,6 @@
   .status-banner.error { background: #fdecea; color: #c62828; border: 1px solid #ef9a9a; }
   .status-banner.success { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
 
-  /* Section divider */
   .divider {
     display: flex;
     align-items: center;
@@ -467,14 +467,8 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* Tooltip */
   .tooltip-icon {
     display: inline-flex;
     width: 14px;
@@ -491,7 +485,6 @@
     vertical-align: middle;
   }
 
-  /* Copy feedback */
   .copy-feedback {
     position: fixed;
     bottom: 32px;
@@ -508,12 +501,8 @@
     z-index: 100;
   }
 
-  .copy-feedback.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  .copy-feedback.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  /* Tabs */
   .tabs {
     display: flex;
     border-bottom: 1px solid var(--border);
@@ -536,16 +525,10 @@
     font-family: 'Noto Sans SC', sans-serif;
   }
 
-  .tab.active {
-    color: var(--ink);
-    border-bottom-color: var(--ink);
-    font-weight: 500;
-  }
-
+  .tab.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* Upload Zone */
   #upload-zone {
     border: 2px dashed var(--border);
     border-radius: 4px;
@@ -556,36 +539,13 @@
     background: white;
     margin-bottom: 12px;
   }
-  #upload-zone:hover, #upload-zone.dragover {
-    border-color: var(--ink);
-    background: rgba(26,26,46,0.03);
-  }
-  .upload-icon {
-    font-size: 28px;
-    color: var(--muted);
-    line-height: 1;
-    margin-bottom: 8px;
-    font-weight: 300;
-  }
-  .upload-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 4px;
-  }
-  .upload-formats {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.03em;
-  }
+  #upload-zone:hover, #upload-zone.dragover { border-color: var(--ink); background: rgba(26,26,46,0.03); }
+  .upload-icon { font-size: 28px; color: var(--muted); line-height: 1; margin-bottom: 8px; font-weight: 300; }
+  .upload-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .upload-formats { font-size: 11px; color: var(--muted); letter-spacing: 0.03em; }
 
-  /* File list */
-  #file-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 4px;
-  }
+  #file-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+
   .file-item {
     display: flex;
     align-items: center;
@@ -608,16 +568,15 @@
   .file-remove { cursor: pointer; color: var(--muted); font-size: 16px; flex-shrink: 0; line-height: 1; padding: 2px; }
   .file-remove:hover { color: var(--accent); }
 
-
   .output-box::-webkit-scrollbar { width: 6px; }
   .output-box::-webkit-scrollbar-track { background: transparent; }
   .output-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-  /* Responsive */
   @media (max-width: 640px) {
     .field-grid { grid-template-columns: 1fr; }
     .gamma-cta { flex-direction: column; }
     .card { padding: 20px; }
+    .mode-btn { font-size: 12px; padding: 10px 10px; }
   }
 </style>
 </head>
@@ -662,33 +621,69 @@
   <!-- Card 1: Config -->
   <div class="card">
     <div class="card-header">
-      <div>
-        <div class="card-title">基本设置</div>
+      <div class="card-title">基本设置</div>
+    </div>
+
+    <!-- Mode Toggle -->
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="mode-btn-own" onclick="switchMode('own')">
+        <span class="mode-tag">自带 Key</span>
+        使用自己的 API Key
+      </button>
+      <button class="mode-btn" id="mode-btn-hosted" onclick="switchMode('hosted')">
+        <span class="mode-tag">托管版</span>
+        使用兑换码（无需自备 Key）
+      </button>
+    </div>
+
+    <!-- 自带 Key 模式 -->
+    <div id="section-own">
+      <div class="field-group">
+        <label>API 来源</label>
+        <select id="api-provider" onchange="onProviderChange()">
+          <option value="openrouter">OpenRouter（推荐 · 国内直连）</option>
+          <option value="anthropic">Anthropic 官方</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label id="key-label">OpenRouter API Key
+          <span class="tooltip-icon" title="从 openrouter.ai → Keys 获取">?</span>
+        </label>
+        <div class="api-key-group">
+          <input type="password" id="api-key" placeholder="sk-or-v1-..." />
+          <button class="btn btn-outline btn-sm" onclick="toggleKey()">显示</button>
+        </div>
+        <div class="api-hint" id="key-hint">
+          🔒 Key 仅在本地浏览器使用，不经过任何服务器 ·
+          <a id="key-link" href="https://openrouter.ai/settings/keys" target="_blank">获取 Key →</a>
+        </div>
       </div>
     </div>
 
-    <div class="field-group">
-      <label>API 来源</label>
-      <select id="api-provider" onchange="onProviderChange()">
-        <option value="openrouter">OpenRouter（推荐 · 你已有账号）</option>
-        <option value="anthropic">Anthropic 官方</option>
-      </select>
+    <!-- 托管版模式 -->
+    <div id="section-hosted" class="redeem-section">
+      <div class="field-group">
+        <label>兑换码
+          <span class="tooltip-icon" title="购买后获得的兑换码，格式如 PPT-LITE-XXXXXX">?</span>
+        </label>
+        <div class="api-key-group">
+          <input type="text" id="redeem-code" placeholder="PPT-LITE-XXXXXX 或 PPT-PRO-XXXXXX" style="text-transform:uppercase;font-family:'JetBrains Mono',monospace;" oninput="this.value=this.value.toUpperCase()" />
+          <button class="btn btn-outline btn-sm" id="btn-verify" onclick="verifyCode()">验证</button>
+        </div>
+        <div class="redeem-error" id="redeem-error"></div>
+        <div id="redeem-ok" style="display:none;">
+          <div class="redeem-info">
+            ✅ 兑换码有效 · 剩余可用次数：<span class="redeem-remaining" id="remaining-count">--</span> 次
+          </div>
+        </div>
+        <div class="api-hint">
+          没有兑换码？<a href="https://afdian.com/a/wilingna" target="_blank">前往购买 →</a>
+        </div>
+      </div>
     </div>
 
-    <div class="field-group">
-      <label id="key-label">OpenRouter API Key
-        <span class="tooltip-icon" title="从 openrouter.ai → Keys 获取">?</span>
-      </label>
-      <div class="api-key-group">
-        <input type="password" id="api-key" placeholder="sk-or-v1-..." />
-        <button class="btn btn-outline btn-sm" onclick="toggleKey()">显示</button>
-      </div>
-      <div class="api-hint" id="key-hint">
-        🔒 Key 仅在本地浏览器使用，不经过任何服务器 ·
-        <a id="key-link" href="https://openrouter.ai/settings/keys" target="_blank">获取 Key →</a>
-      </div>
-    </div>
-
+    <!-- 共用字段 -->
     <div class="field-grid">
       <div class="field-group">
         <label>汇报主题</label>
@@ -719,7 +714,6 @@
       <span class="card-badge badge-claude">Claude Step 1</span>
     </div>
 
-    <!-- Upload Zone -->
     <div id="upload-zone" onclick="document.getElementById('file-input').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
       <div class="upload-icon">＋</div>
       <div class="upload-title">点击或拖拽上传文件</div>
@@ -727,7 +721,6 @@
       <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.md,.png,.jpg,.jpeg,.webp" style="display:none">
     </div>
 
-    <!-- File List -->
     <div id="file-list"></div>
 
     <div class="tabs" style="margin-top: 20px;">
@@ -756,13 +749,11 @@
     </div>
   </div>
 
-  <!-- Generate Button -->
   <button class="btn btn-primary btn-full" id="btn-step1" onclick="runStep1()" style="margin-bottom: 24px; padding: 16px;">
     <span class="spinner" id="spinner1"></span>
     <span id="btn1-text">⚡ 开始生成大纲（Step 1）</span>
   </button>
 
-  <!-- Progress Log -->
   <div class="progress-log" id="progress-log">
     <div class="log-line"><span class="log-time" id="log-time1">--:--</span><span class="log-msg working" id="log1">待机中</span></div>
     <div class="log-line"><span class="log-time" id="log-time2">--:--</span><span class="log-msg" id="log2"></span></div>
@@ -795,10 +786,7 @@
       </button>
     </div>
 
-    <!-- 呈现工具选择 -->
     <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-
-      <!-- Gamma CTA -->
       <div class="gamma-cta" style="margin-top:0;">
         <div class="gamma-cta-text">
           <h3>方案一：Gamma（海外，视觉更丰富）</h3>
@@ -814,7 +802,6 @@
         </a>
       </div>
 
-      <!-- Kimi CTA -->
       <div class="gamma-cta" style="margin-top:0;background:linear-gradient(135deg,#1a2a4a,#2a3a6a);">
         <div class="gamma-cta-text">
           <h3>方案二：Kimi PPT（国内，无需科学上网）</h3>
@@ -829,17 +816,16 @@
           打开 Kimi PPT →
         </a>
       </div>
-
     </div>
   </div>
 
 </div>
 
-<!-- Copy Feedback Toast -->
 <div class="copy-feedback" id="copy-feedback">✓ 已复制到剪贴板</div>
 
 <script>
-  // Wire up file input after DOM ready
+  const WORKER_URL = 'https://ai-ppt-proxy.wiling1002.workers.dev';
+
   document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('file-input').addEventListener('change', function() {
       handleFiles(this.files);
@@ -849,8 +835,62 @@
   let step1Output = '';
   let step2Output = '';
   let activeTab = 'paste';
+  let currentMode = 'own'; // 'own' | 'hosted'
+  let verifiedCode = null;
+  let remainingCount = 0;
 
-  // Provider config
+  // ── Mode switching ──
+  function switchMode(mode) {
+    currentMode = mode;
+    document.getElementById('mode-btn-own').classList.toggle('active', mode === 'own');
+    document.getElementById('mode-btn-hosted').classList.toggle('active', mode === 'hosted');
+    document.getElementById('section-own').style.display = mode === 'own' ? 'block' : 'none';
+    document.getElementById('section-hosted').classList.toggle('visible', mode === 'hosted');
+    hideStatus();
+  }
+
+  // ── Verify redeem code ──
+  async function verifyCode() {
+    const code = document.getElementById('redeem-code').value.trim();
+    if (!code) return showRedeemError('请输入兑换码');
+    const btn = document.getElementById('btn-verify');
+    btn.disabled = true;
+    btn.textContent = '验证中…';
+    document.getElementById('redeem-ok').style.display = 'none';
+    document.getElementById('redeem-error').classList.remove('visible');
+
+    try {
+      const resp = await fetch(WORKER_URL + '/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code })
+      });
+      const data = await resp.json();
+      if (data.valid) {
+        verifiedCode = code;
+        remainingCount = data.remaining;
+        document.getElementById('remaining-count').textContent = remainingCount;
+        document.getElementById('redeem-ok').style.display = 'block';
+        document.getElementById('redeem-error').classList.remove('visible');
+      } else {
+        verifiedCode = null;
+        showRedeemError(data.message || '兑换码无效');
+      }
+    } catch(e) {
+      showRedeemError('网络错误，请重试');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '验证';
+    }
+  }
+
+  function showRedeemError(msg) {
+    const el = document.getElementById('redeem-error');
+    el.textContent = msg;
+    el.classList.add('visible');
+  }
+
+  // ── API call ──
   const PROVIDERS = {
     openrouter: {
       url: 'https://openrouter.ai/api/v1/chat/completions',
@@ -881,7 +921,30 @@
     document.getElementById('api-key').value = '';
   }
 
-  async function callClaude(apiKey, content, maxTokens) {
+  async function callClaude(content, maxTokens) {
+    if (currentMode === 'hosted') {
+      // 托管模式：通过 Worker 代理
+      if (!verifiedCode) throw new Error('请先验证兑换码');
+      const payload = {
+        model: 'anthropic/claude-sonnet-4-5',
+        max_tokens: maxTokens,
+        messages: [{ role: 'user', content: typeof content === 'string' ? content : JSON.stringify(content) }]
+      };
+      const resp = await fetch(WORKER_URL + '/proxy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: verifiedCode, payload })
+      });
+      const data = await resp.json();
+      if (data.error) throw new Error(data.error);
+      // Update remaining count
+      remainingCount = Math.max(0, remainingCount - 1);
+      document.getElementById('remaining-count').textContent = remainingCount;
+      return data.choices[0].message.content;
+    }
+
+    // 自带 Key 模式（原有逻辑）
+    const apiKey = document.getElementById('api-key').value.trim();
     const provider = document.getElementById('api-provider').value;
     const p = PROVIDERS[provider];
 
@@ -941,13 +1004,8 @@
   function toggleKey() {
     const input = document.getElementById('api-key');
     const btn = event.target;
-    if (input.type === 'password') {
-      input.type = 'text';
-      btn.textContent = '隐藏';
-    } else {
-      input.type = 'password';
-      btn.textContent = '显示';
-    }
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '隐藏'; }
+    else { input.type = 'password'; btn.textContent = '显示'; }
   }
 
   function getTime() {
@@ -956,16 +1014,12 @@
 
   function showStatus(msg, type = 'error') {
     const banner = document.getElementById('status-banner');
-    const icon = document.getElementById('status-icon');
-    const msgEl = document.getElementById('status-msg');
     banner.className = 'status-banner visible ' + type;
-    icon.textContent = type === 'error' ? '⚠️' : '✅';
-    msgEl.textContent = msg;
+    document.getElementById('status-icon').textContent = type === 'error' ? '⚠️' : '✅';
+    document.getElementById('status-msg').textContent = msg;
   }
 
-  function hideStatus() {
-    document.getElementById('status-banner').className = 'status-banner';
-  }
+  function hideStatus() { document.getElementById('status-banner').className = 'status-banner'; }
 
   function addLog(idx, msg, type = 'working') {
     document.getElementById('log-time' + idx).textContent = getTime();
@@ -974,8 +1028,7 @@
     el.className = 'log-msg ' + type;
   }
 
-  // ── File upload state ──
-  let uploadedFiles = []; // { name, type, text?, base64?, mediaType?, status }
+  let uploadedFiles = [];
 
   const FILE_ICONS = {
     pdf: '📄', docx: '📝', doc: '📝',
@@ -985,14 +1038,9 @@
   };
 
   function getExt(name) { return name.split('.').pop().toLowerCase(); }
-
   function onDragOver(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('dragover'); }
   function onDragLeave(e) { document.getElementById('upload-zone').classList.remove('dragover'); }
-  function onDrop(e) {
-    e.preventDefault();
-    document.getElementById('upload-zone').classList.remove('dragover');
-    handleFiles(e.dataTransfer.files);
-  }
+  function onDrop(e) { e.preventDefault(); document.getElementById('upload-zone').classList.remove('dragover'); handleFiles(e.dataTransfer.files); }
 
   async function handleFiles(files) {
     for (const file of files) {
@@ -1001,41 +1049,21 @@
       const item = { id, name: file.name, ext, status: 'processing' };
       uploadedFiles.push(item);
       renderFileList();
-
       try {
         if (['png','jpg','jpeg','webp'].includes(ext)) {
-          // Image: convert to base64 for Claude vision
-          item.base64 = await toBase64(file);
-          item.mediaType = file.type || 'image/jpeg';
-          item.type = 'image';
-          item.status = 'done';
+          item.base64 = await toBase64(file); item.mediaType = file.type || 'image/jpeg'; item.type = 'image'; item.status = 'done';
         } else if (ext === 'pdf') {
-          // PDF: base64 for Claude document API
-          item.base64 = await toBase64(file);
-          item.mediaType = 'application/pdf';
-          item.type = 'pdf';
-          item.status = 'done';
+          item.base64 = await toBase64(file); item.mediaType = 'application/pdf'; item.type = 'pdf'; item.status = 'done';
         } else if (['txt','md','csv'].includes(ext)) {
-          item.text = await file.text();
-          item.type = 'text';
-          item.status = 'done';
+          item.text = await file.text(); item.type = 'text'; item.status = 'done';
         } else if (['docx','doc'].includes(ext)) {
-          item.text = await extractDocx(file);
-          item.type = 'text';
-          item.status = 'done';
+          item.text = await extractDocx(file); item.type = 'text'; item.status = 'done';
         } else if (['xlsx','xls'].includes(ext)) {
-          item.text = await extractXlsx(file);
-          item.type = 'text';
-          item.status = 'done';
+          item.text = await extractXlsx(file); item.type = 'text'; item.status = 'done';
         } else {
-          item.text = await file.text();
-          item.type = 'text';
-          item.status = 'done';
+          item.text = await file.text(); item.type = 'text'; item.status = 'done';
         }
-      } catch(e) {
-        item.status = 'error';
-        item.errorMsg = e.message;
-      }
+      } catch(e) { item.status = 'error'; item.errorMsg = e.message; }
       renderFileList();
     }
   }
@@ -1050,26 +1078,18 @@
   }
 
   async function extractDocx(file) {
-    // Load mammoth from CDN
-    if (!window.mammoth) {
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js');
-    }
+    if (!window.mammoth) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js');
     const buf = await file.arrayBuffer();
     const result = await mammoth.extractRawText({ arrayBuffer: buf });
     return result.value;
   }
 
   async function extractXlsx(file) {
-    if (!window.XLSX) {
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');
-    }
+    if (!window.XLSX) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');
     const buf = await file.arrayBuffer();
     const wb = XLSX.read(buf, { type: 'array' });
     let text = '';
-    wb.SheetNames.forEach(name => {
-      text += `\n【Sheet: ${name}】\n`;
-      text += XLSX.utils.sheet_to_csv(wb.Sheets[name]);
-    });
+    wb.SheetNames.forEach(name => { text += `\n【Sheet: ${name}】\n`; text += XLSX.utils.sheet_to_csv(wb.Sheets[name]); });
     return text.trim();
   }
 
@@ -1081,62 +1101,41 @@
     });
   }
 
-  function removeFile(id) {
-    uploadedFiles = uploadedFiles.filter(f => f.id !== id);
-    renderFileList();
-  }
+  function removeFile(id) { uploadedFiles = uploadedFiles.filter(f => f.id !== id); renderFileList(); }
 
   function renderFileList() {
-    const container = document.getElementById('file-list');
-    container.innerHTML = uploadedFiles.map(f => `
+    document.getElementById('file-list').innerHTML = uploadedFiles.map(f => `
       <div class="file-item ${f.status}">
         <span class="file-icon">${FILE_ICONS[f.ext] || '📎'}</span>
         <span class="file-name">${f.name}</span>
-        <span class="file-status">${
-          f.status === 'processing' ? '解析中…' :
-          f.status === 'done' ? '✓ 已就绪' :
-          '⚠ ' + (f.errorMsg || '解析失败')
-        }</span>
+        <span class="file-status">${f.status === 'processing' ? '解析中…' : f.status === 'done' ? '✓ 已就绪' : '⚠ ' + (f.errorMsg || '解析失败')}</span>
         ${f.status !== 'processing' ? `<span class="file-remove" onclick="removeFile('${f.id}')">×</span>` : ''}
       </div>
     `).join('');
   }
 
-  // Build Claude message content with all files + text
   function buildMessageContent(prompt) {
     const provider = document.getElementById('api-provider').value;
     const readyFiles = uploadedFiles.filter(f => f.status === 'done');
 
-    // OpenRouter / non-Anthropic: attach images inline, prepend text files to prompt
-    if (provider !== 'anthropic') {
+    if (currentMode === 'hosted' || provider !== 'anthropic') {
       let extraText = '';
       const imageContent = [];
       readyFiles.forEach(f => {
-        if (f.type === 'text') {
-          extraText += `\n\n【文件：${f.name}】\n${f.text}`;
-        } else if (f.type === 'image') {
-          imageContent.push({ type: 'image_url', image_url: { url: `data:${f.mediaType};base64,${f.base64}` } });
-        } else if (f.type === 'pdf') {
-          extraText += `\n\n【PDF文件：${f.name}（已转为base64，请从文字提示中获取内容）】`;
-        }
+        if (f.type === 'text') extraText += `\n\n【文件：${f.name}】\n${f.text}`;
+        else if (f.type === 'image') imageContent.push({ type: 'image_url', image_url: { url: `data:${f.mediaType};base64,${f.base64}` } });
+        else if (f.type === 'pdf') extraText += `\n\n【PDF文件：${f.name}（已转为base64，请从文字提示中获取内容）】`;
       });
       const fullPrompt = prompt + extraText;
-      if (imageContent.length > 0) {
-        return [{ type: 'text', text: fullPrompt }, ...imageContent];
-      }
+      if (imageContent.length > 0) return [{ type: 'text', text: fullPrompt }, ...imageContent];
       return fullPrompt;
     }
 
-    // Anthropic native: use document + image blocks
     const parts = [];
     readyFiles.forEach(f => {
-      if (f.type === 'text') {
-        parts.push({ type: 'text', text: `【文件：${f.name}】\n${f.text}` });
-      } else if (f.type === 'image') {
-        parts.push({ type: 'image', source: { type: 'base64', media_type: f.mediaType, data: f.base64 } });
-      } else if (f.type === 'pdf') {
-        parts.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: f.base64 } });
-      }
+      if (f.type === 'text') parts.push({ type: 'text', text: `【文件：${f.name}】\n${f.text}` });
+      else if (f.type === 'image') parts.push({ type: 'image', source: { type: 'base64', media_type: f.mediaType, data: f.base64 } });
+      else if (f.type === 'pdf') parts.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: f.base64 } });
     });
     parts.push({ type: 'text', text: prompt });
     return parts;
@@ -1146,28 +1145,33 @@
     const paste = document.getElementById('material-paste').value.trim();
     const desc = document.getElementById('material-describe').value.trim();
     const typed = activeTab === 'paste' ? paste : desc;
-    const fileTexts = uploadedFiles.filter(f => f.status === 'done' && f.type === 'text')
-      .map(f => `【${f.name}】\n${f.text}`).join('\n\n');
+    const fileTexts = uploadedFiles.filter(f => f.status === 'done' && f.type === 'text').map(f => `【${f.name}】\n${f.text}`).join('\n\n');
     const hasImages = uploadedFiles.some(f => f.status === 'done' && (f.type === 'image' || f.type === 'pdf'));
     if (!typed && !fileTexts && !hasImages) return '';
     return [typed, fileTexts].filter(Boolean).join('\n\n') || '（见上传文件）';
   }
 
+  function validateInput() {
+    if (currentMode === 'own') {
+      if (!document.getElementById('api-key').value.trim()) { showStatus('请先填写 API Key'); return false; }
+    } else {
+      if (!verifiedCode) { showStatus('请先输入并验证兑换码'); return false; }
+      if (remainingCount <= 0) { showStatus('兑换码次数已用完，请购买新的兑换码'); return false; }
+    }
+    return true;
+  }
 
   async function runStep1() {
-    const apiKey = document.getElementById('api-key').value.trim();
+    if (!validateInput()) return;
     const topic = document.getElementById('topic').value.trim();
     const duration = document.getElementById('duration').value;
     const audience = document.getElementById('audience').value.trim() || '管理层';
     const role = document.getElementById('role').value.trim() || '资深战略顾问';
-    if (!apiKey) return showStatus('请先填写 API Key');
     if (!topic) return showStatus('请填写汇报主题');
     const material = getMaterial();
     if (!material && uploadedFiles.filter(f=>f.status==='done').length === 0) return showStatus('请上传文件或填写资料内容');
 
     hideStatus();
-
-    // UI state
     const btn = document.getElementById('btn-step1');
     btn.disabled = true;
     document.getElementById('spinner1').style.display = 'block';
@@ -1175,7 +1179,6 @@
     document.getElementById('progress-log').classList.add('visible');
     document.getElementById('output1-section').classList.remove('visible');
     document.getElementById('output2-section').classList.remove('visible');
-
     addLog(1, '正在连接 Claude API…', 'working');
 
     const prompt = `你现在扮演的是一名${role}。
@@ -1215,21 +1218,13 @@ ${material}
 
     try {
       addLog(1, '请求已发送，等待响应…', 'working');
-
-      step1Output = await callClaude(apiKey, messageContent, 2000);
-
+      step1Output = await callClaude(messageContent, 2000);
       addLog(2, 'Claude 响应成功，解析结果…', 'working');
-
-      // Show output
-      const box = document.getElementById('output1-box');
-      box.value = step1Output;
+      document.getElementById('output1-box').value = step1Output;
       document.getElementById('output1-section').classList.add('visible');
-
       addLog(2, '大纲生成完成 ✓', 'success');
       addLog(3, '点击"继续"生成演讲内容', 'working');
-
       updateStepIndicator(2);
-
     } catch (err) {
       addLog(2, '出错：' + err.message, 'error');
       showStatus('API 调用失败：' + err.message);
@@ -1241,21 +1236,19 @@ ${material}
   }
 
   async function runStep2() {
+    if (!validateInput()) return;
     if (!step1Output && !document.getElementById('output1-box').value) return showStatus('请先完成 Step 1');
     step1Output = document.getElementById('output1-box').value || step1Output;
 
-    const apiKey = document.getElementById('api-key').value.trim();
     const role = document.getElementById('role').value.trim() || '资深战略顾问';
     const topic = document.getElementById('topic').value.trim();
 
     hideStatus();
-
     const btn = document.getElementById('btn-step2');
     btn.disabled = true;
     document.getElementById('spinner2').style.display = 'block';
     document.getElementById('btn2-text').textContent = '生成中…';
     document.getElementById('output2-section').classList.remove('visible');
-
     addLog(3, '开始 Step 2：升级表达层…', 'working');
 
     const prompt = `# Role（角色）
@@ -1294,20 +1287,12 @@ ${material}
 ${step1Output}`;
 
     try {
-      step2Output = await callClaude(apiKey, prompt, 8000);
-
-      const box = document.getElementById('output2-box');
-      box.value = step2Output;
+      step2Output = await callClaude(prompt, 8000);
+      document.getElementById('output2-box').value = step2Output;
       document.getElementById('output2-section').classList.add('visible');
-
       addLog(3, 'Gamma Markdown 生成完成 ✓', 'success');
       updateStepIndicator(4);
-
-      // Scroll to output
-      setTimeout(() => {
-        document.getElementById('output2-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 300);
-
+      setTimeout(() => { document.getElementById('output2-section').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
     } catch (err) {
       addLog(3, '出错：' + err.message, 'error');
       showStatus('Step 2 失败：' + err.message);
@@ -1325,18 +1310,6 @@ ${step1Output}`;
       if (i < active) el.classList.add('done');
       else if (i === active) el.classList.add('active');
     }
-  }
-
-  function renderMarkdownPreview(md) {
-    return md
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/^# (.+)$/gm, '<h2 style="font-family:\'Noto Serif SC\',serif;font-size:17px;font-weight:700;margin:20px 0 6px;color:var(--ink)">$1</h2>')
-      .replace(/^## (.+)$/gm, '<h3 style="font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 4px">$1</h3>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/^- (.+)$/gm, '<li style="margin:4px 0 4px 16px;list-style:disc">$1</li>')
-      .replace(/^---$/gm, '<hr style="border:none;border-top:1px solid var(--border);margin:16px 0">')
-      .replace(/\n{2,}/g, '<br>')
-      .replace(/\n/g, '');
   }
 
   function copyOutput(id) {
