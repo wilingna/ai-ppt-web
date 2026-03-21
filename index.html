@@ -928,7 +928,7 @@
       // 托管模式只支持纯文本content（图片/PDF暂不支持）
       const textContent = typeof content === 'string' ? content : (Array.isArray(content) ? content.filter(c => c.type === 'text').map(c => c.text).join('\n') : String(content));
       const payload = {
-        model: 'anthropic/claude-sonnet-4-5',
+        model: 'anthropic/claude-3-5-sonnet',
         max_tokens: maxTokens,
         messages: [{ role: 'user', content: textContent }]
       };
