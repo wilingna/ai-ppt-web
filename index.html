@@ -925,10 +925,12 @@
     if (currentMode === 'hosted') {
       // 托管模式：通过 Worker 代理
       if (!verifiedCode) throw new Error('请先验证兑换码');
+      // 托管模式只支持纯文本content（图片/PDF暂不支持）
+      const textContent = typeof content === 'string' ? content : (Array.isArray(content) ? content.filter(c => c.type === 'text').map(c => c.text).join('\n') : String(content));
       const payload = {
         model: 'anthropic/claude-sonnet-4-5',
         max_tokens: maxTokens,
-        messages: [{ role: 'user', content: typeof content === 'string' ? content : JSON.stringify(content) }]
+        messages: [{ role: 'user', content: textContent }]
       };
       const resp = await fetch(WORKER_URL + '/proxy', {
         method: 'POST',
@@ -936,7 +938,7 @@
         body: JSON.stringify({ code: verifiedCode, payload })
       });
       const data = await resp.json();
-      if (data.error) throw new Error(data.error);
+      if (data.error) throw new Error(typeof data.error === 'string' ? data.error : JSON.stringify(data.error));
       // Update remaining count
       remainingCount = Math.max(0, remainingCount - 1);
       document.getElementById('remaining-count').textContent = remainingCount;
