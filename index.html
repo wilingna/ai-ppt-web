@@ -164,7 +164,6 @@
   .badge-claude { background: #e8f4f6; color: var(--step1); border: 1px solid var(--step1); }
   .badge-gamma { background: #f0ece4; color: var(--step3); border: 1px solid var(--step3); }
 
-  /* ── Mode Toggle ── */
   .mode-toggle {
     display: flex;
     gap: 0;
@@ -208,7 +207,6 @@
     text-transform: uppercase;
   }
 
-  /* Redeem code section */
   .redeem-section {
     display: none;
     animation: fadeInUp 0.3s ease;
@@ -592,7 +590,6 @@
     <p class="subtitle">Claude 替代 NotebookLM + Gemini · 最终由 Gamma 生成视觉稿</p>
   </header>
 
-  <!-- Step Indicator -->
   <div class="step-flow">
     <div class="step-item active" id="step-ind-1">
       <span class="step-num">STEP 01</span>
@@ -612,19 +609,16 @@
     </div>
   </div>
 
-  <!-- Status Banner -->
   <div class="status-banner" id="status-banner">
     <span id="status-icon">⚠️</span>
     <span id="status-msg"></span>
   </div>
 
-  <!-- Card 1: Config -->
   <div class="card">
     <div class="card-header">
       <div class="card-title">基本设置</div>
     </div>
 
-    <!-- Mode Toggle -->
     <div class="mode-toggle">
       <button class="mode-btn active" id="mode-btn-own" onclick="switchMode('own')">
         <span class="mode-tag">自带 Key</span>
@@ -636,7 +630,6 @@
       </button>
     </div>
 
-    <!-- 自带 Key 模式 -->
     <div id="section-own">
       <div class="field-group">
         <label>API 来源</label>
@@ -661,7 +654,6 @@
       </div>
     </div>
 
-    <!-- 托管版模式 -->
     <div id="section-hosted" class="redeem-section">
       <div class="field-group">
         <label>兑换码
@@ -683,7 +675,6 @@
       </div>
     </div>
 
-    <!-- 共用字段 -->
     <div class="field-grid">
       <div class="field-group">
         <label>汇报主题</label>
@@ -707,7 +698,6 @@
     </div>
   </div>
 
-  <!-- Card 2: Input Material -->
   <div class="card">
     <div class="card-header">
       <div class="card-title">原始资料</div>
@@ -760,7 +750,6 @@
     <div class="log-line"><span class="log-time" id="log-time3">--:--</span><span class="log-msg" id="log3"></span></div>
   </div>
 
-  <!-- Output: Step 1 -->
   <div class="output-section" id="output1-section">
     <div class="divider">Step 1 输出 · 战略大纲 <span style="font-size:12px;font-weight:300;opacity:0.7">（可直接编辑修改）</span></div>
     <textarea class="output-box" id="output1-box" style="width:100%;min-height:400px;font-family:'Noto Sans SC',sans-serif;font-size:13px;line-height:1.8;background:white;border:1px solid var(--border);border-radius:3px;padding:20px;resize:vertical;color:var(--ink);"></textarea>
@@ -773,7 +762,6 @@
     </div>
   </div>
 
-  <!-- Output: Step 2 -->
   <div class="output-section" id="output2-section">
     <div class="divider">Step 2 输出 · PPT内容 <span style="font-size:12px;font-weight:300;opacity:0.7">（可直接编辑修改）</span></div>
     <textarea class="output-box" id="output2-box" style="width:100%;min-height:500px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.8;background:white;border:1px solid var(--border);border-radius:3px;padding:20px;resize:vertical;color:var(--ink);"></textarea>
@@ -835,11 +823,10 @@
   let step1Output = '';
   let step2Output = '';
   let activeTab = 'paste';
-  let currentMode = 'own'; // 'own' | 'hosted'
+  let currentMode = 'own';
   let verifiedCode = null;
   let remainingCount = 0;
 
-  // ── Mode switching ──
   function switchMode(mode) {
     currentMode = mode;
     document.getElementById('mode-btn-own').classList.toggle('active', mode === 'own');
@@ -849,7 +836,6 @@
     hideStatus();
   }
 
-  // ── Verify redeem code ──
   async function verifyCode() {
     const code = document.getElementById('redeem-code').value.trim();
     if (!code) return showRedeemError('请输入兑换码');
@@ -890,7 +876,6 @@
     el.classList.add('visible');
   }
 
-  // ── API call ──
   const PROVIDERS = {
     openrouter: {
       url: 'https://openrouter.ai/api/v1/chat/completions',
@@ -923,12 +908,10 @@
 
   async function callClaude(content, maxTokens) {
     if (currentMode === 'hosted') {
-      // 托管模式：通过 Worker 代理
       if (!verifiedCode) throw new Error('请先验证兑换码');
-      // 托管模式只支持纯文本content（图片/PDF暂不支持）
       const textContent = typeof content === 'string' ? content : (Array.isArray(content) ? content.filter(c => c.type === 'text').map(c => c.text).join('\n') : String(content));
       const payload = {
-        model: 'anthropic/claude-3-5-sonnet',
+        model: 'anthropic/claude-sonnet-4-5',
         max_tokens: maxTokens,
         messages: [{ role: 'user', content: textContent }]
       };
@@ -939,13 +922,11 @@
       });
       const data = await resp.json();
       if (data.error) throw new Error(typeof data.error === 'string' ? data.error : JSON.stringify(data.error));
-      // Update remaining count
       remainingCount = Math.max(0, remainingCount - 1);
       document.getElementById('remaining-count').textContent = remainingCount;
       return data.choices[0].message.content;
     }
 
-    // 自带 Key 模式（原有逻辑）
     const apiKey = document.getElementById('api-key').value.trim();
     const provider = document.getElementById('api-provider').value;
     const p = PROVIDERS[provider];
