@@ -22,9 +22,9 @@
 
 ## 🎯 TL;DR
 
-**EN** — `ai-ppt-web` is the web-based upgrade of [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) (300k+ views, 51⭐) — a methodology validated by tens of thousands of Chinese knowledge workers. Claude replaces the NotebookLM + Gemini steps in one page. You paste messy multi-source notes, you get polished Gamma-ready markdown. Then one paste into Gamma → done.
+**EN** — `ai-ppt-web` is the web-based upgrade of [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) (300k+ views) — a methodology validated by tens of thousands of Chinese knowledge workers. Claude replaces the NotebookLM + Gemini steps in one page. You paste messy multi-source notes, you get polished Gamma-ready markdown. Then one paste into Gamma → done.
 
-**中文** — 本工具是 [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit)（30 万+ 播放、51 颗星）这套方法论的**网页版升级**。Claude 在一个网页里替掉了 NotebookLM 和 Gemini 两步——粘乱资料进去，拿出 Gamma 能直接用的 Markdown，再粘一次到 Gamma 就完成了。
+**中文** — 本工具是 [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit)（30 万+ 播放）这套方法论的**网页版升级**。Claude 在一个网页里替掉了 NotebookLM 和 Gemini 两步——粘乱资料进去，拿出 Gamma 能直接用的 Markdown，再粘一次到 Gamma 就完成了。
 
 ```
 Before · 之前:  Notes → NotebookLM → Gemini → Gamma   (3 tools, 3 logins)
@@ -214,8 +214,8 @@ This repo is the middle child in a 3-stage evolution. If you're building "AI for
 
 ### 🥇 [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) — The Methodology · 方法论
 
-Three tools, three jobs. NotebookLM + Gemini + Gamma. **51 ⭐, 300k+ views on Xiaohongshu** — the most validated AI-slides workflow in the Chinese productivity community.
-三个工具各司其职。**51 颗星、小红书 30 万+ 播放**——华语生产力圈最被验证的 AI 做 PPT 工作流。
+Three tools, three jobs. NotebookLM + Gemini + Gamma. **300k+ views on Xiaohongshu** — the most validated AI-slides workflow in the Chinese productivity community.
+三个工具各司其职。**小红书 30 万+ 播放**——华语生产力圈最被验证的 AI 做 PPT 工作流。
 
 ### 🥈 **ai-ppt-web** (this repo) · 第一次合并
 
@@ -266,7 +266,7 @@ Big-tech HR turned AI Systems Architect. Building AI workflows and Chinese-aesth
 
 | Repo | What it does |
 |---|---|
-| [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) | The original 3-tool methodology · 三件套原版（51⭐）|
+| [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) | The original 3-tool methodology · 三件套原版|
 | [PPTFlux](https://github.com/wilingna/PPTFlux) | 4-agent pipeline → interactive HTML decks · 4 Agent 闭环 |
 | [ai-decision-5steps](https://github.com/wilingna/ai-decision-5steps) | High-quality decisions in 5 AI-powered steps · 5 步 AI 决策 |
 | [ai-content-pipeline](https://github.com/wilingna/ai-content-pipeline) | 7-agent content production pipeline · 7 Agent 内容生产线 |
